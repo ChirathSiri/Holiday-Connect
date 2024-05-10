@@ -14,31 +14,35 @@ class Users extends \Restserver\Libraries\REST_Controller {
         Header('Access-Control-Allow-Headers: *');
         Header('Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE'); 
     }
-    //load login view
+    
+    // Display the login interface
     public function index_get(){
         $this->load->view('login');
     }
-    //load signup view
+
+    // Display the signup interface
     public function signup_get(){
         $this->load->view('signup');
     }
+
     public function login_get(){
-        //display login with error if the data sent is invalid
+        // Show login with an error message if the provided data is invalid
         if (isset($this->session->login_error) && $this->session->login_error == True) {
             $this->session->unset_userdata('login_error');
             $this->load->view('login',
-                              array('login_error_msg' => "Invalid username or password. Please try again!"));
+                              array('login_error_msg' => "Invalid Username or Password. Try Again !"));
         }
         else {
             $this->load->view('login');
         }
     }
-    //set session logged_in to false to logout
+    // Update the session status to logged_out by setting logged_in to false
     public function logout_get(){
             $this->session->is_logged_in = False;
             $this->login_get();
     }
-    //load userprofile view
+
+    // Display the userprofile interface
     public function userprofile_get(){
         if ($this->usersmod->is_logged_in()) {
             $username = $this->get('username');
@@ -49,13 +53,15 @@ class Users extends \Restserver\Libraries\REST_Controller {
             $this->load->view('login');
         }
     }
-    //api to get all users
+    
+    // Endpoint to retrieve all users from the API
     public function user_get(){
         $result = $this->usersmod->getUsers();
         $this->response($result); 
     }
+
     public function user_post() {
-        //if action is signup, create a user
+        // If the action is "signup", initiate user action.
         if($this->get('action') == 'signup') {
             $username = $this->post('username');
             $password = $this->post('password');
@@ -67,7 +73,8 @@ class Users extends \Restserver\Libraries\REST_Controller {
             } else {
                 $this->response(array('result' => 'success'));
             } 
-        //if action is login, validate data and add user to session
+        
+        // If the action is "login", verify the data and include the user in the session.
         } else if($this->get('action') == 'login') {
             $username = $this->post('username');
             $password = $this->post('password');
@@ -83,13 +90,14 @@ class Users extends \Restserver\Libraries\REST_Controller {
                 $this->session->username = $username;
                 $this->response(array('result' => 'success'));
             }
-        //if action is checkuser, check if the user is already in database
+        // If the action is "checker", verify whether the user is already present in the database.
         }else if($this->get('action') == 'checkuser') {
             $username = $this->post('username');
             $result = $this->usersmod->checkUser($username);
             $this->response($result);                
         }
-        //if action is passwordreset, update the password of the user
+
+        // If the action is "password-reset", modify the user's password.
         else if($this->get('action') == 'passwordreset') {
             $username = $this->post('username');
             $password = $this->post('password');
@@ -106,7 +114,8 @@ class Users extends \Restserver\Libraries\REST_Controller {
                 $this->response(array('result' => 'failed'));
             }            
         }
-        //if action is searchuser, get user details
+
+        // If the action is "search user", retrieve user details.
         else if($this->get('action') == 'searchuser') {
             if ($this->usersmod->is_logged_in()) {
                 $username = $this->post('username');
@@ -118,11 +127,13 @@ class Users extends \Restserver\Libraries\REST_Controller {
             }      
         }        
     }
-    //load password reset view
+
+    //Display password reset interface
     public function passwordreset_get(){
         $this->load->view('passwordreset');
     }
-    //api to get details from given user
+
+    // Endpoint to fetch details for the specified user from the API
     public function userdetails_get() {
         if ($this->usersmod->is_logged_in()) {
             $username = $this->get('username');
@@ -137,7 +148,8 @@ class Users extends \Restserver\Libraries\REST_Controller {
             $this->load->view('login');
         } 
     }
-    //update user details with post request
+
+    // Update user details using a POST request.
     public function editprofile_put(){
         if ($this->usersmod->is_logged_in()) {
             $username = $this->put('username');
