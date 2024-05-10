@@ -161,3 +161,19 @@ input:-webkit-autofill:active{
   .errormsg{
 	color: #f80404;
   }
+
+  footer {
+    /* background-color: #a36dd3;
+    color: rgb(1, 1, 1);
+    padding: 10px;
+    text-align: center; */
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #8f85eb;
+    color: rgb(1, 1, 1);
+    padding: 10px;
+    text-align: center;
+    text-decoration: solid;
+}
