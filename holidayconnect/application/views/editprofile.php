@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Holiday Connect Edit Profile</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/edituserprofile.css">
 </head>
@@ -72,7 +73,7 @@
         var atposition = x.indexOf("@");
         var dotposition = x.lastIndexOf(".");
         if (atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= x.length) {
-            document.getElementById("errormsg2").innerHTML = "Please enter a valid e-mail address";
+            document.getElementById("errormsg2").innerHTML = "Please enter a valid Email Address !";
         }
         else {
             document.getElementById("errormsg2").innerHTML = "";
@@ -137,7 +138,7 @@
                     location.href="<?php echo base_url()?>index.php/myprofile";
                 }
                 else{
-                    document.getElementById("errormsg2").innerHTML = "Couldn't save your changes";
+                    document.getElementById("errormsg2").innerHTML = "Could not able to save your changes !";
                 }
             });
         });                    

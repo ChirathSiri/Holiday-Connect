@@ -18,21 +18,18 @@
           <!-- Search bar -->
           <div class="searchdiv"> 
                <input type="text" class="search" id="search" placeholder="Search for user..." onkeyup='searchusers()'/>
+               <img class="searchicon" src="<?php echo base_url() ?>images/search.png" alt="Search Icon"/>
           </div>
           <!-- Navigation link -->
           <div class="linkdiv">
-               <div class="linkelement">
-                    <a href="<?php echo base_url()?>index.php/posts">
-                    <img class="linkimage" src="<?php echo base_url() ?>images/add.png"/></a>
-               </div>
-               <!-- Add post link -->
+               <!-- Home link -->
                <div class="linkelement">
                     <a href="<?php echo base_url()?>index.php/home">
-                    <img class="linkimage" src="<?php echo base_url() ?>images/home.png"/></a>
+                    <img class="homeimage" src="<?php echo base_url() ?>images/home.png"/></a>
                </div>
                <!-- Notification bell icon -->
                <div class="linkelement">
-                    <img style="cursor:pointer" onclick='notifications();' class="linkimage" src="<?php echo base_url() ?>images/bell.png"/>
+                    <img style="cursor:pointer" onclick='notifications();' class="bellimage" src="<?php echo base_url() ?>images/bell.png"/>
                </div>
                <!-- Logout Link -->
                <div class="linkelement">
@@ -74,7 +71,7 @@
                     var div ="<div class ='user noresult'>No Results</div>";
                     $('#searchresults').append(div);
                }
-               else{
+               else{//show user with their user profile
                     for (i = 0; i < data.length; i++) {
                          var div ="<a class='userlinks' href='<?php echo base_url() ?>index.php/users/userprofile/?username="
                          +data[i].Username+"'><div class ='user'><div class= 'seauserimagediv'><img class='seauserimage' src='<?php echo base_url() ?>images/profilepics/"
@@ -129,4 +126,9 @@
      }
      </script>
 </body>
+
+<footer>
+    &copy;Holiday Connect 2024 | W1809835
+</footer>
+
 </html>

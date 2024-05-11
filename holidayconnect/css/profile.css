@@ -159,3 +159,23 @@ footer {
 #nametag{
     font-size: 20px;
 }
+
+.addlinkbutton{
+    height: 15%;
+    width: 20%;
+    position: fixed;
+    right: 35%;
+    bottom: 0;
+    margin: 0%;
+    transform: translateX(60%);
+}
+
+.linkimage{
+    height: 50%;
+    width: 20%;
+    position: fixed;
+    right: 20%;
+    bottom: 50;
+    margin: 0%;
+    transform: translateX(50%);
+}

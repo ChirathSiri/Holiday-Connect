@@ -11,9 +11,12 @@
 
 <body>
 <div class="profilecontainer">
+    <!-- Profile details section -->
     <div class="profiledeetdiv">
+        <!-- Top section containing profile picture and follow details -->
         <div class="topdiv">
             <div class="profpicdiv"></div>
+            <!-- Profile picture display -->
             <div class="followdiv">
                 <!-- Show followers and following count in the user profile -->
                 <div class="flabel"> Following </div>
@@ -22,15 +25,25 @@
                 <div class="fcount" id="followerc"></div>
             </div>
         </div>
+        <!-- Username display -->
         <div class="usernamediv"><?php echo $username ?></div>
+        <!-- Full name display -->
         <div class="namediv"></div>
+        <!-- Bio display -->
         <div class="biodiv"></div>
+        <!-- Edit profile button -->
         <div class="profbottomdiv">
             <img class="editimage" src="<?php echo base_url() ?>images/edit.png"/></a>
             <a class="editprlink" href="<?php echo base_url()?>index.php/myprofile/editprofile">edit profile</a>
         </div>
     </div>
+    <!-- Posts section -->
     <div class="postsdiv" id="postsdiv"></div>
+</div>
+<div class="addlinkbutton">
+ <!-- Add post link -->
+    <a href="<?php echo base_url()?>index.php/posts">
+    <img class="linkimage" src="<?php echo base_url() ?>images/add.png"/></a>
 </div>
 
 <script type="text/javascript" lang="javascript">
@@ -98,7 +111,6 @@
     var postCollection = new PostCollection();
     var postDisplay = new PostDisplay({model: postCollection})
 </script>
-
 </body>
 
 <footer>

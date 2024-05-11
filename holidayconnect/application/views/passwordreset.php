@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Holiday Connect</title>
+    <title>Holiday Connect Reset Password</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" 
         type="text/javascript"></script>
@@ -11,24 +11,34 @@
 
 </head>
 <body>
-<div class="logodiv"><img class="logoimage" src="<?php echo base_url()?>images/logo.png" alt="Logo"/> </div>
+ <!-- Logo section -->
+<div class="logodiv">
+    <img class="logoimage" src="<?php echo base_url()?>images/logo.png" alt="Logo"/> 
+</div>
+<!-- Password reset form -->
 <div class="pwform">
+    <!-- Heading -->
     <div class="pwresetheading"><span> RESET YOUR PASSWORD </span></div>
+    <!-- Error message section -->
     <div class="errormsg" id="errormsg"></div>
+    <!-- Form -->
     <form class="authforms" name="loginform">
         <div class="input">
+            <!-- Username input -->
             <input class="loginfield" type=text id="username" name='username' onkeyup='checkinputs();' required/>
             <label class="loginlabel"> Enter Your Username :<span style="color:#EB9494">*</label>
         </div>
         <div class="input">
+            <!-- Password input -->
             <input class="loginfield" type=password id="password" name='password' onkeyup='checkinputs();' required/>
             <label class="loginlabel"> Enter New Password :<span style="color:#EB9494">*</label>
         </div>
+        <!-- Submit button -->
         <div class="action">
             <input class="loginbtn" type=submit disabled="disabled" id="changepw" value="RESET" />
         </div>
     </form>
-
+    <!-- Sign up link -->
     <div class="loginspandiv">
         <span>Or <a href="<?php echo base_url()?>index.php/users/signup"> Sign Up </a> Here !</span>
     </div>
@@ -65,10 +75,11 @@ $("#changepw").click(function(event) {
             location.href = "<?php echo base_url() ?>index.php/myprofile";
         }
         else {
-            document.getElementById("errormsg").innerHTML = "Username Doesn't Exist!"
+            document.getElementById("errormsg").innerHTML = "Username Does Not Exist !"
         }
     });
     });
 </script>
 </body>
+
 </html>
