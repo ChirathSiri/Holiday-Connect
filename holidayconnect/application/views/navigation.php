@@ -36,6 +36,9 @@
                     <a href="<?php echo base_url()?>index.php/users/logout">
                     <img class="logoutimage" src="<?php echo base_url() ?>images/logout.png"/></a>
                </div>
+               <div class="container">
+                    <img id="theme-toggle" class="lightimage" src="<?php echo base_url() ?>images/moon.png" alt="Toggle Light Mode">
+               </div>
           </div>
           <!-- User profile link -->
           <div class="profilediv">
@@ -124,6 +127,18 @@
           document.getElementById("notifications").style.display = "none";
      }
      }
+     </script>
+
+     <script>
+          const themeToggle = document.getElementById('theme-toggle');
+          const body = document.body;
+
+          themeToggle.addEventListener('click', () => {
+               body.classList.toggle('dark-mode');
+               const currentSrc = themeToggle.getAttribute('src');
+               const newSrc = currentSrc.includes('sun') ? '<?php echo base_url() ?>images/moon.png' : '<?php echo base_url() ?>images/sun.png';
+               themeToggle.setAttribute('src', newSrc);
+          });
      </script>
 </body>
 

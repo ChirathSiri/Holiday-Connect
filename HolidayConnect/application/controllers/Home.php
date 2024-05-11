@@ -7,17 +7,17 @@ class Home extends \Restserver\Libraries\REST_Controller {
 	
 	public function __construct() {
         parent::__construct();
-		$this->load->model('usersmod');
-        $this->load->model('postmod');
+		$this->load->model('UserModelFile');
+        $this->load->model('PostModelFile');
 
         Header('Access-Control-Allow-Origin: *');
         Header('Access-Control-Allow-Headers: *');
         Header('Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE'); 
     }
-    //home page
+    //Holiday Connect Home Page View
     public function index_get()
-    {//check if user is logged in, otherwise redirect to login page
-        if ($this->usersmod->is_logged_in()) {
+    {//Verify if the user is logged in; if not, redirect them to the login page.
+        if ($this->UserModelFile->is_logged_in()) {
             $this->load->view('navigation',array('username' => $this->session->username));
             $this->load->view('home',array('username' => $this->session->username));
         }
@@ -25,60 +25,60 @@ class Home extends \Restserver\Libraries\REST_Controller {
             $this->load->view('login');
         }
     }
-    //api to get posts of following users
+    //An API endpoint to retrieve posts from users being followed.
     public function followingposts_get(){
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $username = $this->get('username');
-            $result=$this->postmod->getPostsofFollowing($username);
+            $result=$this->PostModelFile->getPostsofFollowing($username);
             $this->response($result); 
         }
         else {
             $this->load->view('login');
         }
     }
-    //api to get comments of posts
+    //An API endpoint to retrieve comments on posts.
     public function comments_get(){
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $postid = $this->get('postid');
-            $result=$this->postmod->getComments($postid);
+            $result=$this->PostModelFile->getComments($postid);
             $this->response($result); 
         }
         else {
             $this->load->view('login');
         }
     }
-    //api post request to add comments
+    //A POST API request to add comments.
     public function comments_post(){
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $username = $this->session->username;
             $postid = $this->post('postid');
             $comment = $this->post('comment');
-            $result=$this->postmod->addComments($postid, $comment, $username);
+            $result=$this->PostModelFile->addComments($postid, $comment, $username);
             $this->response($result); 
         }
         else {
             $this->load->view('login');
         }
     }
-    //api to check if user has already liked a post
+    //An API endpoint to check if a user has already liked a post.
     public function checklikes_get(){
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $username = $this->session->username;
             $postid = $this->get('postid');
-            $result=$this->postmod->checklikes($username, $postid);
+            $result=$this->PostModelFile->checklikes($username, $postid);
             $this->response($result); 
         }
         else {
             $this->load->view('login');
         }
     }
-    //post request to like posts
+    //POST requests to like posts.
     public function like_post(){
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $username = $this->session->username;
             $username = $this->post('username');
             $postid = $this->post('postid');
-            $result=$this->postmod->likepost($username, $postid);
+            $result=$this->PostModelFile->likepost($username, $postid);
             $this->response($result); 
         }
         else {

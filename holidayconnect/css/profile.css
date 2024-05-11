@@ -1,5 +1,7 @@
 body {
 	background-color: #ffffff;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 .profilecontainer{
     width: 100%;

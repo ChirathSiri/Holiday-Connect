@@ -15,7 +15,7 @@
         <div class="errormsg" id="errormsg"></div>
         <!-- Post picture display -->
         <div class="postpicdiv">
-             <img id='postpicid' src='<?php echo base_url() ?>images/userposts/default.jpg' alt='picture'/>
+             <img id='postpicid' src='<?php echo base_url() ?>images/userposts/image.png' alt='picture'/>
         </div>
         <!-- File input for image upload -->
         <input type="file" id="image" name="image" required="required" onchange="readURL(this);"/>  

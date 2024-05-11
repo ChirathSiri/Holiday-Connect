@@ -8,16 +8,16 @@ class Posts extends \Restserver\Libraries\REST_Controller {
 	
 	function __construct() {
         parent::__construct();
-		$this->load->model('usersmod');
-        $this->load->model('postmod');
+		$this->load->model('UserModelFile');
+        $this->load->model('PostModelFile');
 
         Header('Access-Control-Allow-Origin: *');
         Header('Access-Control-Allow-Headers: *');
         Header('Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE'); 
     }
-    //index routes to create post view
+    //Set up routes to render the create post view.
     public function index_get(){
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $this->load->view('navigation',array('username' => $this->session->username));
             $this->load->view('createpost');
         }
@@ -25,9 +25,9 @@ class Posts extends \Restserver\Libraries\REST_Controller {
             $this->load->view('login');
         }
     }
-    //to save the post image in folder
+    //Save the post image in the designated folder.
     public function store_post() {
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $config['upload_path'] = "./images/userposts/";//path
             $config['allowed_types'] = 'gif|jpg|png';//file types allowed
             $this->load->library('upload', $config);
@@ -43,9 +43,9 @@ class Posts extends \Restserver\Libraries\REST_Controller {
             $this->load->view('login');
         }
     }
-    //to save the profile picture image in folder
+    //Save the profile picture image in the designated folder.
     public function profpic_post() {
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $config['upload_path'] = "./images/profilepics/";
             $config['allowed_types'] = 'gif|jpg|png';
             $this->load->library('upload', $config);
@@ -61,14 +61,14 @@ class Posts extends \Restserver\Libraries\REST_Controller {
             $this->load->view('login');
         }
     }
-    //post request to create a post
+    //A POST request to create a new post.
     public function create_post() {
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $username = $this->session->username;
             $locationid = $this->post('locationid');
             $postImage = $this->post('postImage');
             $caption = $this->post('caption');
-            $result = $this->postmod->createPost($username, $locationid, $postImage, $caption);
+            $result = $this->PostModelFile->createPost($username, $locationid, $postImage, $caption);
 
             $this->response($result); 
             if ($result) {
@@ -81,32 +81,32 @@ class Posts extends \Restserver\Libraries\REST_Controller {
             $this->load->view('login');
         }
     }
-    //api to get all posts from a user
+    //An API endpoint to retrieve all posts from a specific user.
     public function userposts_get(){
         $username = $this->get('username');
-        $result = $this->postmod->getPostsfromUsername($username);
+        $result = $this->PostModelFile->getPostsfromUsername($username);
         $this->response($result);
     }
     public function location_get() {
-        //action all gets all locations
+        //The action retrieves all locations.
         if($this->get('action') == 'all') {
-            $locations = $this->postmod->getLocations();
+            $locations = $this->PostModelFile->getLocations();
             if ($locations) {
                 $this->response($locations);
             } else {
                 $this->response(NULL);
             } 
         }
-        //action id get the post by its id
+        //The action retrieves the post by its ID.
         if($this->get('action') == 'id') {
             $locationid = $this->get('locationid');
-            $locations = $this->postmod->getLocationbyId($locationid);
+            $locations = $this->PostModelFile->getLocationbyId($locationid);
             $this->response($locations);
         }
     }
-    //get the location view
+    //Retrieve the location view.
      public function locations_get() {
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $locationid = $this->get('locationid');
             $this->load->view('navigation',array('username' => $this->session->username));
             $this->load->view('locations',array('locationid' => $locationid));
@@ -116,14 +116,14 @@ class Posts extends \Restserver\Libraries\REST_Controller {
         } 
     }
     public function post_get() {
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $postid = $this->get('postid');
-            //if action is view, get post details from id
+            //If the action is "view", retrieve post details based on its ID.
             if($this->get('action') == 'view') {
-                $result = $this->postmod->postfromid($postid);
+                $result = $this->PostModelFile->postfromid($postid);
                 $this->response($result);
             }
-            //else load the post view
+            //Otherwise, load the post view.
             else{
                 $this->load->view('navigation',array('username' => $this->session->username));
                 $this->load->view('post',array('postid' => $postid,'username' => $this->session->username));
@@ -133,22 +133,22 @@ class Posts extends \Restserver\Libraries\REST_Controller {
             $this->load->view('login');
         } 
     }
-    //api to get posts from given location
+    //An API endpoint to retrieve posts from a specified location.
     public function locationposts_get(){
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $locationid = $this->get('locationid');
-            $result = $this->postmod->postsFromLocation($locationid);
+            $result = $this->PostModelFile->postsFromLocation($locationid);
             $this->response($result);
         }
         else {
             $this->load->view('login');
         } 
     }
-    //api to get the like count
+    //An API endpoint to retrieve the like count.
     public function likecount_get(){
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $postid = $this->get('postid');
-            $result = $this->postmod->likeCount($postid);
+            $result = $this->PostModelFile->likeCount($postid);
             $this->response($result);
         }
         else {
