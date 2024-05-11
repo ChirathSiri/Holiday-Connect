@@ -3,6 +3,8 @@ body {
 	line-height: 1.5;
 	background-color: #ffffff;
     margin: 0px;
+    background-color: var(--background-color);
+    color: var(--text-color);
   }
 .navigationdiv{
     max-height: 85px;
@@ -227,6 +229,38 @@ footer {
     position: absolute;
     top: 50%;
     left: 85%;
+    transform: translateY(-50%);
+    width: auto;
+}
+
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+}
+
+.dark-mode {
+    --background-color: #333333;
+    --text-color: #ffffff;
+}
+
+.container {
+    padding: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+.lightimage{
+    height: 50%;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    right: 300%;
     transform: translateY(-50%);
     width: auto;
 }

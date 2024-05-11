@@ -8,7 +8,7 @@ class Users extends \Restserver\Libraries\REST_Controller {
 	
 	function __construct() {
         parent::__construct();
-		$this->load->model('usersmod');
+		$this->load->model('UserModelFile');
 
         Header('Access-Control-Allow-Origin: *');
         Header('Access-Control-Allow-Headers: *');
@@ -44,7 +44,7 @@ class Users extends \Restserver\Libraries\REST_Controller {
 
     // Display the userprofile interface
     public function userprofile_get(){
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $username = $this->get('username');
             $this->load->view('navigation',array('username' => $this->session->username));
             $this->load->view('userprofile',array('username' => $username));
@@ -56,7 +56,7 @@ class Users extends \Restserver\Libraries\REST_Controller {
     
     // Endpoint to retrieve all users from the API
     public function user_get(){
-        $result = $this->usersmod->getUsers();
+        $result = $this->UserModelFile->getUsers();
         $this->response($result); 
     }
 
@@ -67,7 +67,7 @@ class Users extends \Restserver\Libraries\REST_Controller {
             $password = $this->post('password');
             $email = $this->post('email');
             $name = $this->post('name');
-            $result = $this->usersmod->create($username, $password, $email, $name);
+            $result = $this->UserModelFile->create($username, $password, $email, $name);
             if ($result === FALSE) {
                 $this->response(array('result' => 'failed'));
             } else {
@@ -79,7 +79,7 @@ class Users extends \Restserver\Libraries\REST_Controller {
             $username = $this->post('username');
             $password = $this->post('password');
 
-            $result = $this->usersmod->login($username,$password);
+            $result = $this->UserModelFile->login($username,$password);
 
             if ($result === false) {
                 $this->session->login_error = True;
@@ -93,7 +93,7 @@ class Users extends \Restserver\Libraries\REST_Controller {
         // If the action is "checker", verify whether the user is already present in the database.
         }else if($this->get('action') == 'checkuser') {
             $username = $this->post('username');
-            $result = $this->usersmod->checkUser($username);
+            $result = $this->UserModelFile->checkUser($username);
             $this->response($result);                
         }
 
@@ -101,9 +101,9 @@ class Users extends \Restserver\Libraries\REST_Controller {
         else if($this->get('action') == 'passwordreset') {
             $username = $this->post('username');
             $password = $this->post('password');
-            $result=$this->usersmod->passwordreset($username, $password);
+            $result=$this->UserModelFile->passwordreset($username, $password);
             if ($result) {
-                if ($this->usersmod->is_logged_in()){
+                if ($this->UserModelFile->is_logged_in()){
                     $this->response(array('result' => 'logged'));
                 }
                 else{
@@ -117,9 +117,9 @@ class Users extends \Restserver\Libraries\REST_Controller {
 
         // If the action is "search user", retrieve user details.
         else if($this->get('action') == 'searchuser') {
-            if ($this->usersmod->is_logged_in()) {
+            if ($this->UserModelFile->is_logged_in()) {
                 $username = $this->post('username');
-                $result=$this->usersmod->searchUser($username);
+                $result=$this->UserModelFile->searchUser($username);
                 $this->response($result); 
             }
             else {
@@ -135,9 +135,9 @@ class Users extends \Restserver\Libraries\REST_Controller {
 
     // Endpoint to fetch details for the specified user from the API
     public function userdetails_get() {
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $username = $this->get('username');
-            $userlist = $this->usersmod->getUser($username);
+            $userlist = $this->UserModelFile->getUser($username);
             if ($userlist) {
                 $this->response($userlist);
             } else {
@@ -151,13 +151,13 @@ class Users extends \Restserver\Libraries\REST_Controller {
 
     // Update user details using a POST request.
     public function editprofile_put(){
-        if ($this->usersmod->is_logged_in()) {
+        if ($this->UserModelFile->is_logged_in()) {
             $username = $this->put('username');
             $bio = $this->put('bio');
             $name = $this->put('name');
             $email = $this->put('email');
             $userimage = $this->put('userimage');
-            $result=$this->usersmod->editprofile($username, $bio, $name, $email, $userimage);
+            $result=$this->UserModelFile->editprofile($username, $bio, $name, $email, $userimage);
             if ($result) {
                 $this->response(array('result' => 'done'));
             }

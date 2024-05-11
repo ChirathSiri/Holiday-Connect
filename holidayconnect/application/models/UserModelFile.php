@@ -1,15 +1,16 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-//model for user related database tasks
-class Usersmod extends CI_Model
+// Model for user-related database tasks
+class UserModelFile extends CI_Model
 {
     public function __construct()
     {
         parent::__construct();
         $this->load->database();
     }
-    //insert to user while sign up
+
+    // Insert user data during sign-up
     function create($username, $password, $email, $name)
     {
         $hashed = password_hash($password, PASSWORD_DEFAULT);
@@ -21,7 +22,8 @@ class Usersmod extends CI_Model
             return False;
         }
     }
-    //get all from user table
+
+   // Model to fetch all data from the user table
     public function getUsers()
     {
         $query = $this->db->get('users');
@@ -30,7 +32,8 @@ class Usersmod extends CI_Model
         }
         return NULL;
     }
-    //verify credentials when logging in
+
+    // Model to verify user credentials during login
     function login($username, $password)
     {
         $res = $this->db->get_where('users', array('Username' => $username));
@@ -45,7 +48,8 @@ class Usersmod extends CI_Model
             }
         }
     }
-    //check if user is logged in session
+
+    // Model to check if a user is logged in session
     function is_logged_in()
     {
         if (isset($this->session->is_logged_in) && $this->session->is_logged_in == True) {
@@ -54,7 +58,8 @@ class Usersmod extends CI_Model
             return False;
         }
     }
-    //update password column of user table
+
+    // Model for updating the password column of the user table
     public function passwordreset($username, $password){
         $hashed = password_hash($password, PASSWORD_DEFAULT);
         $res = $this->db->get_where('users', array('Username' => $username));
@@ -73,12 +78,14 @@ class Usersmod extends CI_Model
             }
         }
     }
-    //query user table to search users
+
+    // Model for searching users in the user table
     public function searchUser($username){
         $query=$this->db->query("SELECT * FROM users WHERE Username LIKE '".$username."%'");
         return $query->result();
     }
-    //insert rows to following and nitification table when followed
+
+    // Model for handling follow actions and notification updates
     public function followuser($username,$isfollowing){
         $users = $this->db->get_where('users', array('Username' => $username));
         $userId= $users->row()->UserId;
@@ -96,7 +103,8 @@ class Usersmod extends CI_Model
             return "added";
         }
     }
-    //query to check if a user is following another
+
+    // Model for querying if a user is following another user
     public function checkfollowing($username,$isfollowing){
         $users = $this->db->get_where('users', array('Username' => $username));
         $userId= $users->row()->UserId;
@@ -111,7 +119,8 @@ class Usersmod extends CI_Model
             return false;
         }
     }
-    //get number of rows in following table to get counts of followers/following
+
+    // Model for getting counts of followers/following
     public function followcount($username){
         $users = $this->db->get_where('users', array('Username' => $username));
         $userId= $users->row()->UserId;
@@ -122,24 +131,28 @@ class Usersmod extends CI_Model
         return array('following' => $following,'followers' => $followers);
         
     }
-    //select all from users for username
+
+    //Retrieve all records from the "users" table where the username matches.
     public function getUser($username)
     {
         $res = $this->db->get_where('users', array('Username' => $username));
         return $res->row();
     }
-    //query to check if a user is available
+
+    //A query to verify the user's availability.
     public function checkUser($username)
     {
         $res = $this->db->get_where('users', array('Username' => $username));
         return $res->num_rows();
     }
-    //update rows in user 
+
+    //Update records in the user table.
     public function editprofile($username, $bio, $name, $email, $userimage){
         $query=$this->db->query("UPDATE users SET Name='".$name."',Email='".$email."',UserBio='".$bio."',UserImage='".$userimage."' WHERE Username='".$username."'");
         return $query;
     }
-    //select all notificiations for user
+
+    //Retrieve all notifications associated with a user.
     public function notifications($username){
         $users = $this->db->get_where('users', array('Username' => $username));
         $userId= $users->row()->UserId;
@@ -149,6 +162,4 @@ class Usersmod extends CI_Model
         }
         return NULL;
     }
-
-    
 }
