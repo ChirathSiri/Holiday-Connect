@@ -49,16 +49,16 @@
         getComments();
         likecount();
         $.ajax({// Retrieve post details.
-            url: "<?php echo base_url() ?>index.php/posts/post/action/view?postid="+postid,
+            url: "<?php echo base_url() ?>index.php/createpost/post/action/view?postid="+postid,
             method: "GET"
             }).done(function (data) {// Show post details.
                 var div ="<img class='postimage' src='<?php echo base_url() ?>images/userposts/"+data.PostImage+"' alt='picture'/>";
                 $('.postimagediv').append(div);
-                var div2 ="<a href='<?php echo base_url() ?>index.php/posts/locations?locationid="
+                var div2 ="<a href='<?php echo base_url() ?>index.php/createpost/locations?locationid="
                 + data.LocationId +"'><span><i class='fa-solid fa-location-dot'></i>"+ data.LocationName +"</span></a>";
                 $('.locationdiv').append(div2);
                 var div3 ="<div class= 'userimagediv'><img class='userimage' src='<?php echo base_url() ?>images/profilepics/"
-                         +data.UserImage+"'/></div><div class='usernamediv'><a href='<?php echo base_url() ?>index.php/users/userprofile/?username="
+                         +data.UserImage+"'/></div><div class='usernamediv'><a href='<?php echo base_url() ?>index.php/logincon/userprofile/?username="
                          +data.Username +"'><span>"+ data.Username +"</span></a></div>";
                 $('.usernameimgdiv').append(div3);
                 var div4 ="<i onclick='like();' class='fa-solid fa-heart'></i>";
@@ -138,7 +138,7 @@
             if(res.length!=0){    
                 $('.commentsdiv div').remove();       
                 for (i = 0; i < res.length; i++) {
-                    var div ="<div class='comments'><a href='<?php echo base_url() ?>index.php/users/userprofile/?username="+res[i].Username+"'>"+res[i].Username+"</a>"
+                    var div ="<div class='comments'><a href='<?php echo base_url() ?>index.php/logincon/userprofile/?username="+res[i].Username+"'>"+res[i].Username+"</a>"
                     +res[i].CommentBody+"</div>";
                     $('.commentsdiv').append(div);
                 } 
@@ -148,7 +148,7 @@
     // Retrieve the like count of the post.
     function likecount(){
         $.ajax({
-                url: "<?php echo base_url() ?>index.php/posts/likecount?postid="+postid,
+                url: "<?php echo base_url() ?>index.php/createpost/likecount?postid="+postid,
                 method: "GET"
         }).done(function (res) {
             $('.likecount span').remove();       

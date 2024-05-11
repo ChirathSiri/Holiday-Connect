@@ -46,7 +46,7 @@
         var $locationid = "1";
         // Load location posts at startup and display them in the dropdown.
         $.ajax({
-            url: "<?php echo base_url() ?>index.php/posts/location/action/all",
+            url: "<?php echo base_url() ?>index.php/createpost/location/action/all",
             method: "GET"
         }).done(function (data) {
 	        $('#locations option').remove(); 
@@ -83,7 +83,7 @@
             if(files.length > 0 ){
                 formdata.append('image',files[0]);
             $.ajax({
-                url: "<?php echo base_url() ?>index.php/posts/store",// Store the image in the folder.
+                url: "<?php echo base_url() ?>index.php/createpost/store",// Store the image in the folder.
                 data: formdata,
                 method: "POST",
                 contentType: false,
@@ -98,14 +98,14 @@
                         caption: $('#caption').val()
                     };
                     $.ajax({
-                        url: "<?php echo base_url() ?>index.php/posts/create", // Send data to the database.
+                        url: "<?php echo base_url() ?>index.php/createpost/create", // Send data to the database.
                         data: JSON.stringify(postdata),
                         contentType: "application/json",
                         method: "POST"
                     }).done(function (data) {
                         var result = data.result;
                         if (result == "done") {// Redirect to my profile upon success.
-                            location.href="<?php echo base_url()?>index.php/myprofile";
+                            location.href="<?php echo base_url()?>index.php/profilecon";
                         }
                         else {// Otherwise, display an error message.
                             document.getElementById("errormsg").innerHTML = "Post Creation Unsuccesful !";

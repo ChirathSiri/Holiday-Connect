@@ -27,16 +27,16 @@
     $(document).ready(function () {
         event.preventDefault();
         $.ajax({// Retrieve the follow count of the specific user.
-            url: "<?php echo base_url() ?>index.php/myprofile/followcount?username="+username,
+            url: "<?php echo base_url() ?>index.php/profilecon/followcount?username="+username,
             method: "GET"
         }).done(function (data) {
             if (data.following==0){// If the follow count is 0, show no posts and suggest users to follow.
                 $.ajax({
-                    url: "<?php echo base_url() ?>index.php/users/user",
+                    url: "<?php echo base_url() ?>index.php/logincon/user",
                     method: "GET"
                 }).done(function (data) {
                     for (i = 0; i < 5; i++) {
-                        var div ="<a href='<?php echo base_url() ?>index.php/users/userprofile/?username="
+                        var div ="<a href='<?php echo base_url() ?>index.php/logincon/userprofile/?username="
                          +data[i].Username+"'><div class='users'><div class= 'profilepicdiv'><img class='profilepic' src='<?php echo base_url() ?>images/profilepics/"
                          +data[i].UserImage+"'/></div>"+data[i].Username+"</br>"+data[i].Name+"</div></a>";
                         $('.userlisting').append(div);
@@ -60,11 +60,11 @@
             this.listenTo(this.model, "add", this.showResults);
         },
         showResults: function (m) {// Show all posts in the Backbone view.
-            html = html + "<div class='postdiv'><div class='locationdiv'><a href='<?php echo base_url() ?>index.php/posts/locations?locationid="
+            html = html + "<div class='postdiv'><div class='locationdiv'><a href='<?php echo base_url() ?>index.php/createpost/locations?locationid="
             + m.get('LocationId') +"'><span><i class='fa-solid fa-location-dot'></i>"
-            + m.get('LocationName') +"</span></a></div><a href='<?php echo base_url() ?>index.php/posts/post?postid="
+            + m.get('LocationName') +"</span></a></div><a href='<?php echo base_url() ?>index.php/createpost/post?postid="
             + m.get('PostId') +"'><img class='postimage' src='<?php echo base_url() ?>images/userposts/"
-            + m.get('PostImage') + "'/></a><div class='userlikediv'><div class='usernamediv'><a href='<?php echo base_url() ?>index.php/users/userprofile/?username="
+            + m.get('PostImage') + "'/></a><div class='userlikediv'><div class='usernamediv'><a href='<?php echo base_url() ?>index.php/logincon/userprofile/?username="
             + m.get('Username') +"'><span>"+ m.get('Username') +"</span></a></div><div class='likediv' id='likediv"
             + m.get('PostId') +"'><i onclick='like("+m.get('PostId')+");' class='fa-solid fa-heart'></i></div></div><div class='captiondiv'>"
             + m.get('Caption')+"</div><div class='commentsdiv' id='commentsdiv"
@@ -78,7 +78,7 @@
                 if(res.length!=0){             
                     for (i = 0; i < res.length; i++) {
                         if(i<2){
-                            var div ="<span><a class='commuserlink' href='<?php echo base_url() ?>index.php/users/userprofile/?username="+res[i].Username+"'>"+res[i].Username+"</a>"
+                            var div ="<span><a class='commuserlink' href='<?php echo base_url() ?>index.php/logincon/userprofile/?username="+res[i].Username+"'>"+res[i].Username+"</a>"
                             +res[i].CommentBody+"</span></br>";
                             $('#commentsdiv'+m.get('PostId')).append(div);
                         }

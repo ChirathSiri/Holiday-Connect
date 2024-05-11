@@ -33,7 +33,7 @@
                </div>
                <!-- Logout Link -->
                <div class="linkelement">
-                    <a href="<?php echo base_url()?>index.php/users/logout">
+                    <a href="<?php echo base_url()?>index.php/logincon/logout">
                     <img class="logoutimage" src="<?php echo base_url() ?>images/logout.png"/></a>
                </div>
                <div class="container">
@@ -43,7 +43,7 @@
           <!-- User profile link -->
           <div class="profilediv">
                <div class="userlink">
-               <a href="<?php echo base_url()?>index.php/myprofile" class="profilelink"><span><?php echo $username ?></span></a></div>
+               <a href="<?php echo base_url()?>index.php/profilecon" class="profilelink"><span><?php echo $username ?></span></a></div>
           </div>
      </div>
      <!-- Search Result and Notification -->
@@ -63,7 +63,7 @@
                 username: "@" + $('#search').val().toLowerCase()
           };
           $.ajax({// Retrieve users based on the search string.
-                url: "<?php echo base_url() ?>index.php/users/user/action/searchuser",
+                url: "<?php echo base_url() ?>index.php/logincon/user/action/searchuser",
                 data: JSON.stringify(userdata),
                 contentType: "application/json",
                 method: "POST"
@@ -76,7 +76,7 @@
                }
                else{//show user with their user profile
                     for (i = 0; i < data.length; i++) {
-                         var div ="<a class='userlinks' href='<?php echo base_url() ?>index.php/users/userprofile/?username="
+                         var div ="<a class='userlinks' href='<?php echo base_url() ?>index.php/logincon/userprofile/?username="
                          +data[i].Username+"'><div class ='user'><div class= 'seauserimagediv'><img class='seauserimage' src='<?php echo base_url() ?>images/profilepics/"
                          +data[i].UserImage+"'/></div><div class='searuserdeet'>"+data[i].Username+"<br>"+data[i].Name+"</div></div></a>";
                          $('#searchresults').append(div);
@@ -89,7 +89,7 @@
           if(document.getElementById("notifications").style.display == "none"){
                document.getElementById("notifications").style.display = "block";
                $.ajax({// Retrieve notifications for the user.
-                    url: "<?php echo base_url() ?>index.php/myprofile/notifications",
+                    url: "<?php echo base_url() ?>index.php/profilecon/notifications",
                     data: JSON.stringify({username: username}),
                     contentType: "application/json",
                     method: "GET"
@@ -104,18 +104,18 @@
                     for (i = 0; i < data.length; i++) {
                          // If there is a comment body, it indicates a comment notification.
                          if (data[i].CommentBody!=null && data[i].PostId!=null){
-                              var div ="<a href='<?php echo base_url() ?>index.php/posts/post?postid="
+                              var div ="<a href='<?php echo base_url() ?>index.php/createpost/post?postid="
                               +data[i].PostId+"'><div>"+data[i].Username+"    "+data[i].Notification+"</br><span class='commentspam'>"
                               +data[i].CommentBody+"</span></div></a>";
                               $('#notifications').append(div);
                          }// If there is a post ID but no comment, it signifies a post like.
                          else if(data[i].CommentBody==null && data[i].PostId!=null){
-                              var div ="<a href='<?php echo base_url() ?>index.php/posts/post?postid="
+                              var div ="<a href='<?php echo base_url() ?>index.php/createpost/post?postid="
                               +data[i].PostId+"'><div>"+data[i].Username+"    "+data[i].Notification+"</div></a>";
                               $('#notifications').append(div);
                          }// Otherwise, it indicates a follow notification.
                          else if(data[i].CommentBody==null && data[i].PostId==null){
-                              var div ="<a href='<?php echo base_url() ?>index.php/users/userprofile/?username="
+                              var div ="<a href='<?php echo base_url() ?>index.php/logincon/userprofile/?username="
                               +data[i].Username+"'><div>"+data[i].Username+"    "+data[i].Notification+"</div></a>";
                               $('#notifications').append(div);
                          }

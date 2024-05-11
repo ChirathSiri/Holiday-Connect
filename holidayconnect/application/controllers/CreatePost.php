@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require APPPATH . '/libraries/REST_Controller.php';
 
-class Posts extends \Restserver\Libraries\REST_Controller {
+class CreatePost extends \Restserver\Libraries\REST_Controller {
 	
 	function __construct() {
         parent::__construct();

@@ -34,7 +34,7 @@
         <!-- Edit profile button -->
         <div class="profbottomdiv">
             <img class="editimage" src="<?php echo base_url() ?>images/edit.png"/></a>
-            <a class="editprlink" href="<?php echo base_url()?>index.php/myprofile/editprofile">edit profile</a>
+            <a class="editprlink" href="<?php echo base_url()?>index.php/profilecon/editprofile">edit profile</a>
         </div>
     </div>
     <!-- Posts section -->
@@ -42,7 +42,7 @@
 </div>
 <div class="addlinkbutton">
  <!-- Add post link -->
-    <a href="<?php echo base_url()?>index.php/posts">
+    <a href="<?php echo base_url()?>index.php/createpost">
     <img class="linkimage" src="<?php echo base_url() ?>images/add.png"/></a>
 </div>
 
@@ -53,7 +53,7 @@
         event.preventDefault();
         postCollection.fetch();
         $.ajax({// Retrieve user details via API.
-            url: "<?php echo base_url() ?>index.php/users/userdetails?username="+username,
+            url: "<?php echo base_url() ?>index.php/logincon/userdetails?username="+username,
             method: "GET"
         }).done(function (data) {
             var div ="<img class='profileimage' src='<?php echo base_url() ?>images/profilepics/"+data.UserImage+"'/>";
@@ -64,7 +64,7 @@
             $('.biodiv').append(bio);
         });
         $.ajax({// Retrieve follower/following counts.
-            url: "<?php echo base_url() ?>index.php/myprofile/followcount?username="+username,
+            url: "<?php echo base_url() ?>index.php/profilecon/followcount?username="+username,
             method: "GET"
         }).done(function (data) {
             document.getElementById("followingc").innerHTML = data.following
@@ -74,12 +74,12 @@
    // Define Backbone model for a post
     var Post = Backbone.Model.extend({
         // URL to fetch post data from the server
-        url: "<?php echo base_url() ?>index.php/myprofile/myposts"
+        url: "<?php echo base_url() ?>index.php/profilecon/myposts"
     });
     // Define Backbone collection for posts
     var PostCollection = Backbone.Collection.extend({
         // URL to fetch post collection data from the server
-        url: "<?php echo base_url() ?>index.php/myprofile/myposts",
+        url: "<?php echo base_url() ?>index.php/profilecon/myposts",
         // Define the model associated with this collection
         model: Post,
         // Parse the fetched data
@@ -99,7 +99,7 @@
             var html = "";
             // Iterate over each model in the collectio
             this.model.each(function (m) {
-                html = html + "<div class='postimagediv'><a href='<?php echo base_url() ?>index.php/posts/post?postid="
+                html = html + "<div class='postimagediv'><a href='<?php echo base_url() ?>index.php/createpost/post?postid="
                 + m.get('PostId') +"'><img class='postimage' src='<?php echo base_url() ?>images/userposts/"
                 + m.get('PostImage') + "'/></a></div>";
             });

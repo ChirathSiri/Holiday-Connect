@@ -58,10 +58,10 @@
 
     <div class="loginspandiv">
 
-        <a href="<?php echo base_url()?>index.php/users/passwordreset">Forgot Your Password Here ?</a>
+        <a href="<?php echo base_url()?>index.php/logincon/passwordreset">Forgot Your Password Here ?</a>
         <br>
         <span>Don't have an account? Please 
-            <a href="<?php echo base_url()?>index.php/users/signup">Sign Up</a> 
+            <a href="<?php echo base_url()?>index.php/logincon/signup">Sign Up</a> 
             here !
         </span>
     </div>
@@ -88,7 +88,7 @@
         // Define Backbone Model for handling login data
         var Login = Backbone.Model.extend({
             // Specify the URL for the login action on the server
-            url:"<?php echo base_url()?>index.php/users/user/action/login"
+            url:"<?php echo base_url()?>index.php/logincon/user/action/login"
         });
         // Define Backbone Collection for managing groups of login models
         var LoginCollection = Backbone.Collection.extend({
@@ -107,7 +107,7 @@
                     if (result=="success") {//redirect to home
                         location.href="<?php echo base_url()?>index.php/home/";  
                     } else {//else redirect to login
-                        location.href="<?php echo base_url()?>index.php/users/login";
+                        location.href="<?php echo base_url()?>index.php/logincon/login";
                     }
                 }
             });

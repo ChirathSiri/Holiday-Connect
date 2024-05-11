@@ -40,7 +40,7 @@
     </form>
     <!-- Sign up link -->
     <div class="loginspandiv">
-        <span>Or <a href="<?php echo base_url()?>index.php/users/signup"> Sign Up </a> Here !</span>
+        <span>Or <a href="<?php echo base_url()?>index.php/logincon/signup"> Sign Up </a> Here !</span>
     </div>
 </div>
 
@@ -62,17 +62,17 @@ $("#changepw").click(function(event) {
         password: $('#password').val()
     };
     $.ajax({
-        url: "<?php echo base_url() ?>index.php/users/user/action/passwordreset",
+        url: "<?php echo base_url() ?>index.php/logincon/user/action/passwordreset",
         data: JSON.stringify(pwdata),
         contentType: "application/json",
         method: "POST"
     }).done(function (data) {
         var result = data.result;
         if (result == "success") {
-            location.href = "<?php echo base_url() ?>index.php/users/login";
+            location.href = "<?php echo base_url() ?>index.php/logincon/login";
         }
         else if (result == "logged") {//if result is logged, means user is changing pw while logged in
-            location.href = "<?php echo base_url() ?>index.php/myprofile";
+            location.href = "<?php echo base_url() ?>index.php/profilecon";
         }
         else {
             document.getElementById("errormsg").innerHTML = "Username Does Not Exist !"
