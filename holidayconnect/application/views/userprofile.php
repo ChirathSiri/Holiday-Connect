@@ -11,25 +11,36 @@
 
 <body>
 <div class="profilecontainer">
+<!-- Profile details section -->
 <div class="profiledeetdiv">
+    <!-- Top section containing profile picture and follow details -->
     <div class="topdiv">
+        <!-- Profile picture display -->
         <div class="profpicdiv"></div>
+        <!-- Follow details -->
         <div class="followdiv">
+            <!-- Following count -->
             <div class="flabel">Following</div>
             <div class="fcount" id="followingc"></div>
+            <!-- Followers count -->
             <div class="flabel">Followers</div>
             <div class="fcount" id="followerc"></div>
         </div>
     </div>
+    <!-- Username display -->
     <div class="usernamediv" id="nametag"><?php echo $username ?></div>
+    <!-- Full name display -->
     <div class="namediv"></div>
+    <!-- Bio display -->
     <div class="biodiv"></div>
+    <!-- Follow button -->
     <div class="profbottomdiv">
-    <a href="#" onclick='follow();'><div id="followbutton">  </div></a>
+     <!-- Follow button -->
+        <a href="#" onclick='follow();'><div id="followbutton"> </div></a>
     </div>
 </div>
-<div class="postsdiv" id="postsdiv">
-</div>
+<!-- Posts section -->
+<div class="postsdiv" id="postsdiv"></div>
 </div>
 
 <script type="text/javascript" lang="javascript">

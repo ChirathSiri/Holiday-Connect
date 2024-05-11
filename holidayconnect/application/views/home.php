@@ -11,9 +11,13 @@
 </head>
 
 <body>
+<!-- Container for feed content -->
 <div class="feedcontainer">
+    <!-- Container for users not followed -->
     <div class='notfollowing'>
+        <!-- Heading -->
         <div class='heading'> Follow New Users to View Posts in Your Timeline </div>
+        <!-- User listing -->
         <div class='userlisting'></div>
     </div>
 <div>
@@ -121,7 +125,9 @@
     }
 </script>
 </body>
+
 <footer>
     &copy;Holiday Connect 2024 | W1809835
 </footer>
+
 </html>

@@ -12,11 +12,12 @@
 </head>
 
 <body>
-
+<!-- Logo section -->
 <div class="logodiv">
+    <!-- Logo image -->
     <img class="logoimage" src="<?php echo base_url()?>images/logo.png" alt="Logo"/> 
 </div>
-
+<!-- Login form section -->
 <div class="loginform">
 
     <div class="logheading">
@@ -31,24 +32,25 @@
     </div> <?php } ?>
 
     <form class="authforms" name="loginform">
-
+        <!-- Username input -->
         <div class="input">
             <input class="loginfield" type=text id="username" name='username' onkeyup='checkinputs();' required/>
-
+           
             <label class="loginlabel"> Username :
                 <span style="color:#EB9494">*</span>
             </label>
 
         </div>
-
+    
         <div class="input">
+             <!-- Password input -->
             <input class="loginfield" type=password id="password" name='password' onkeyup='checkinputs();' required/>
 
             <label class="loginlabel"> Password :
                 <span style="color:#EB9494">*</span>
             </label>
         </div>
-
+        <!-- Login button -->
         <div class="action">
             <input class="loginbtn" type=submit disabled="disabled" id="login" value="LOGIN" />
         </div>
@@ -112,4 +114,9 @@
         }
     </script>
 </body>
+
+<footer>
+    &copy;Holiday Connect 2024 | W1809835
+</footer>
+
 </html>

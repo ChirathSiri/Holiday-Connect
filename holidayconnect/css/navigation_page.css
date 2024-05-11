@@ -62,8 +62,16 @@ body {
     width: 30%;
     float: left;
 }
-.linkimage{
+.homeimage{
     height: 40%;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+}
+.bellimage{
+    height: 50%;
     width: auto;
     position: absolute;
     top: 50%;
@@ -188,11 +196,11 @@ body {
 }
 
 .logoutimage{
-    height: 35%;
+    height: 40%;
     width: auto;
     position: absolute;
     top: 50%;
-    left: 90%;
+    left: 65%;
     transform: translateY(-50%);
     width: auto;
 }
@@ -211,4 +219,14 @@ footer {
     padding: 10px;
     text-align: center;
     text-decoration: solid;
+}
+
+.searchicon{
+    height: 40%;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    left: 85%;
+    transform: translateY(-50%);
+    width: auto;
 }
