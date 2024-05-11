@@ -50,7 +50,7 @@
         postCollection.fetch();// Fetch posts from the collection upon startup.
         checkfollow();// Verify if the current profile follows this user.
         $.ajax({// Retrieve user details and show them.
-            url: "<?php echo base_url() ?>index.php/users/userdetails?username="+username,
+            url: "<?php echo base_url() ?>index.php/logincon/userdetails?username="+username,
             method: "GET"
         }).done(function (data) {
             var div ="<img class='profileimage' src='<?php echo base_url() ?>images/profilepics/"+data.UserImage+"'/>";
@@ -65,12 +65,12 @@
     // Backbone model for a post
     var Post = Backbone.Model.extend({
         // URL to fetch user posts from the server
-        url: "<?php echo base_url() ?>index.php/posts/userposts?username="+username
+        url: "<?php echo base_url() ?>index.php/createpost/userposts?username="+username
     });
     // Backbone collection for user posts
     var PostCollection = Backbone.Collection.extend({
         // URL to fetch user posts collection from the server
-        url: "<?php echo base_url() ?>index.php/posts/userposts?username="+username,
+        url: "<?php echo base_url() ?>index.php/createpost/userposts?username="+username,
         // Specify the model associated with this collection
         model: Post,
         // Parse the fetched data
@@ -93,7 +93,7 @@
             var html = "";
             // Generate HTML for each post
             this.model.each(function (m) {
-                html = html + "<div class='postimagediv'><a href='<?php echo base_url() ?>index.php/posts/post?postid="
+                html = html + "<div class='postimagediv'><a href='<?php echo base_url() ?>index.php/createpost/post?postid="
                 + m.get('PostId') +"'><img class='postimage' src='<?php echo base_url() ?>images/userposts/"
                 + m.get('PostImage') + "'/></a></div>";
             });
@@ -105,7 +105,7 @@
     var postDisplay = new PostDisplay({model: postCollection})
     function followcount(){
         $.ajax({// Retrieve follower/following count and show it.
-            url: "<?php echo base_url() ?>index.php/myprofile/followcount?username="+username,
+            url: "<?php echo base_url() ?>index.php/profilecon/followcount?username="+username,
             method: "GET"
         }).done(function (data) {
             document.getElementById("followingc").innerHTML = data.following
@@ -114,7 +114,7 @@
     }
     function follow(){// Handling click events on the follow button.
         $.ajax({
-            url: "<?php echo base_url() ?>index.php/myprofile/follow",
+            url: "<?php echo base_url() ?>index.php/profilecon/follow",
             data: JSON.stringify({isfollowing: username}),
             contentType: "application/json",
             method: "POST"
@@ -125,14 +125,14 @@
     }
     function checkfollow(){// Verify if the user has already followed and update the button accordingly.
         $.ajax({
-            url: "<?php echo base_url() ?>index.php/myprofile/checkfollow?isfollowing="+username,
+            url: "<?php echo base_url() ?>index.php/profilecon/checkfollow?isfollowing="+username,
             method: "GET"
         }).done(function (data) {
             if (data) {
-                 document.getElementById("followbutton").innerHTML = "UNFOLLOW"
+                 document.getElementById("followbutton").innerHTML = "Unfollow"
             }
             else {
-                document.getElementById("followbutton").innerHTML = "FOLLOW"
+                document.getElementById("followbutton").innerHTML = "Follow"
             }
         });
     }        

@@ -22,7 +22,7 @@
         <!-- Edit image icon -->
         <img class="editimage" src="<?php echo base_url() ?>images/edit.png"/></a>
         <!-- Change password link -->
-        <div class="changepwdiv"><a href="<?php echo base_url()?>index.php/users/passwordreset">Reset Password</a></div>
+        <div class="changepwdiv"><a href="<?php echo base_url()?>index.php/logincon/passwordreset">Reset Password</a></div>
     </div>
     <!-- Profile picture editing section -->
     <div class="piceditdiv">
@@ -50,7 +50,7 @@
         event.preventDefault();
         // Fetch user details upon loading and render them.
         $.ajax({
-            url: "<?php echo base_url() ?>index.php/users/userdetails?username="+username,
+            url: "<?php echo base_url() ?>index.php/logincon/userdetails?username="+username,
             method: "GET"
         }).done(function (data) {
             userimage=data.UserImage;
@@ -95,7 +95,7 @@
             if(files.length > 0 ){
                 formdata.append('image',files[0]);
                 $.ajax({
-                    url: "<?php echo base_url() ?>index.php/posts/profpic",//store the image in folder
+                    url: "<?php echo base_url() ?>index.php/createpost/profpic",//store the image in folder
                     data: formdata,
                     method: "POST",
                     contentType: false,
@@ -128,14 +128,14 @@
                 email:email
         }
         $.ajax({
-            url: "<?php echo base_url() ?>index.php/users/editprofile",
+            url: "<?php echo base_url() ?>index.php/logincon/editprofile",
             data: JSON.stringify(postdata),
             contentType: "application/json",
             method: "PUT"
             }).done(function (data) {
                 var result=data.result;
                 if(result=="done"){// Redirect to my profile if the operation is successful.
-                    location.href="<?php echo base_url()?>index.php/myprofile";
+                    location.href="<?php echo base_url()?>index.php/profilecon";
                 }
                 else{
                     document.getElementById("errormsg2").innerHTML = "Could not able to save your changes !";

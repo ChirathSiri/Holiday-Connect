@@ -59,7 +59,7 @@
             </div>
         </form>
         <div class="signspandiv">
-            <span>Already have a Holiday CONNECT account? Please <a href="<?php echo base_url() ?>index.php/users/login">Login</a> </span>
+            <span>Already have a Holiday CONNECT account? Please <a href="<?php echo base_url() ?>index.php/logincon/login">Login</a> </span>
         </div>
     </div>
 
@@ -88,7 +88,7 @@
     }
     function checkusername() {// Verify if the username is already taken or not.
         $.ajax({
-            url: "<?php echo base_url() ?>index.php/users/user/action/checkuser",
+            url: "<?php echo base_url() ?>index.php/logincon/user/action/checkuser",
             data: { 'username': "@" + $('#username').val().toLowerCase() },
             method: "POST"// Utilize the POST method.
         }).done(function (data) {
@@ -110,7 +110,7 @@
     // Define Backbone Model for handling signup data
     var User = Backbone.Model.extend({
         // Specify the URL for the signup action on the server
-        url: "<?php echo base_url() ?>index.php/users/user/action/signup"
+        url: "<?php echo base_url() ?>index.php/logincon/user/action/signup"
     });
     // Define Backbone Collection for managing groups of signup models
     var UserCollection = Backbone.Collection.extend({
@@ -126,7 +126,7 @@
         newUser.set('password', $("#password").val());// Redirect back to the home page.
         usersCollection.create(newUser, {
             success: function () {// Redirect to the login success page.
-                location.href = "<?php echo base_url() ?>index.php/users/login";
+                location.href = "<?php echo base_url() ?>index.php/logincon/login";
             }
         });
     }

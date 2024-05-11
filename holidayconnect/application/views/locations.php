@@ -28,19 +28,19 @@
     $(document).ready(function () {
         event.preventDefault();
         $.ajax({// Get all posts from the given location ID at the start and display the posts
-            url: "<?php echo base_url() ?>index.php/posts/location/action/id?locationid="+locationid,
+            url: "<?php echo base_url() ?>index.php/createpost/location/action/id?locationid="+locationid,
             method: "GET"
             }).done(function (data) {
                 document.getElementById("locationname").innerHTML = "<i class='fa-solid fa-location-dot'></i>"+data.LocationName;
             });
         $.ajax({
-            url: "<?php echo base_url() ?>index.php/posts/location/action/all",
+            url: "<?php echo base_url() ?>index.php/createpost/location/action/all",
             method: "GET"
         })
         .done(function (data) {
             for (i = (locationid-8); i < (+locationid+8); i++) {
                 if(data[i]!=null){// Display a few other locations in the list for easier browsing
-                    var span ="<a href='<?php echo base_url() ?>index.php/posts/locations?locationid="
+                    var span ="<a href='<?php echo base_url() ?>index.php/createpost/locations?locationid="
                     +data[i].LocationId+"'><span>"+data[i].LocationName+"</span></a></br>";
 			        $('#locationlist').append(span);
                 }
@@ -51,7 +51,7 @@
     });    
     // Define a Backbone view to display posts
     var PostCollection = Backbone.Collection.extend({
-        url: "<?php echo base_url() ?>index.php/posts/locationposts?locationid="+locationid,
+        url: "<?php echo base_url() ?>index.php/createpost/locationposts?locationid="+locationid,
     });
 
     var html = "";
@@ -62,7 +62,7 @@
         },
         showResults: function (m) {
             // Render each post as HTML and append to the element
-            html = html + "<div class='imagelocdiv'><a href='<?php echo base_url() ?>index.php/posts/post?postid="
+            html = html + "<div class='imagelocdiv'><a href='<?php echo base_url() ?>index.php/createpost/post?postid="
             +m.get('PostId')+"'><img class='locpostimage' src='<?php echo base_url() ?>images/userposts/"+m.get('PostImage')+"'/></a></div>";
             this.$el.html(html);  
         }
