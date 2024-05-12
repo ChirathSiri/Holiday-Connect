@@ -7,15 +7,45 @@
     width: 30%;
     aspect-ratio : 1 / 1.5;
     margin-left: 2.5%;
+    margin-bottom: 50px; 
     background-color: white;
     float: left;
+    border-radius: 30px; /* Add curved margin */
+    position: relative;
 }
+
+.postdiv::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    background: linear-gradient(45deg, #fff, #725eda, #33edce, #fff);
+    background-size: 300% 300%;
+    border-radius: 20px; /* Match the border-radius of the postdiv */
+    z-index: -1;
+    animation: glitter 1.5s ease infinite;
+}
+
+@keyframes glitter {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
 .postimage{
     width: 90%;
     aspect-ratio : 1 / 1;
     border-radius: 10px;
     object-fit: cover;
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
     display: block;
 }
 .locationdiv{
